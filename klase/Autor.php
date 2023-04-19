@@ -6,6 +6,34 @@ class Autor extends KonekcijaDB
    public $Ime;
    public $Napomena;
 
+   public function setIdAutora($p){
+      $this->IdAutora=$p;
+   }
+   public function getIdAutora(){
+      return $this->IdAutora;
+   }
+
+   public function setPrezime($p){
+      $this->Prezime=$p;
+   }
+   public function getPrezime(){
+      return $this->Prezime;
+   }
+
+   public function setIme($p){
+      $this->Ime=$p;
+   }
+   public function getIme(){
+      return $this->Ime;
+   }
+
+   public function setNapomena($p){
+      $this->Napomena=$p;
+   }
+   public function getNapomena(){
+      return $this->Napomena;
+   }
+
    public function Dodavanje()
    {
        //pocetne vrednosti result-seta (dvodimenzionalna matrica, tj. tabela) i ostalih promenljivih
@@ -85,6 +113,33 @@ class Autor extends KonekcijaDB
       //zatvaranje konekcije do BP
       $uspehzkbp=$this->ZatvaranjeKonekcije();
       return $uspeh;
+   }
+
+   public function PrikazSvih()
+   {
+      //pocetne vrednosti result-seta (dvodimenzionalna matrica, tj. tabela) i promenljive uspeh
+      $result = "";
+      $uspehzkbp = "";
+      $uspeh = "false";
+      //otvaranje konekcije do BP
+      $konekcija=$this->OtvaranjeKonekcije();
+      //formiranje SQL upita za izdvajanje podataka
+      $upit = "SELECT * FROM `autor` ORDER BY `ID autora` ASC;";
+      //izvrsavanje SQL upita
+      $result = mysqli_query($konekcija, $upit);               
+      /*provera rezultata izvrsavanja SQL upita 
+      i ispis informacije o gresci*/
+      if(!$result)
+               {
+                  mysqli_error($konekcija);
+               }
+            else
+               {
+                  $uspeh="true";
+               }
+      //zatvaranje konekcije do BP
+      $uspehzkbp=$this->ZatvaranjeKonekcije();
+      return $result;
    }
    
    public function Pretraga()

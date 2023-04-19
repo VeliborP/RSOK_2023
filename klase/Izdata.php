@@ -175,7 +175,11 @@ class Izdata extends KonekcijaDB
        //formiranje SQL upita za izdvajanje podataka
        //datum opomene se nalazi u delu teksta opomene
        //i ne postoji kao poseban atribut i kolona tabele BP
-       $upit = "SELECT `bibliotecka jedinica`.*, `izdata`.*, `clan`.* FROM (`bibliotecka jedinica` INNER JOIN `izdata` ON `izdata`.`Inventarni broj` = `bibliotecka jedinica`.`Inventarni broj`) RIGHT JOIN `clan` ON `izdata`.`Broj clana` = `clan`.`Broj clana` WHERE Opomena<>'';";
+       $upit = "SELECT `bibliotecka jedinica`.*, `izdata`.*, `clan`.* 
+               FROM (`bibliotecka jedinica` INNER JOIN `izdata` ON `izdata`.`Inventarni broj` = `bibliotecka jedinica`.`Inventarni broj`) 
+               RIGHT JOIN `clan` ON `izdata`.`Broj clana` = `clan`.`Broj clana` 
+               WHERE Opomena<>'';";
+
        //izvrsavanje SQL upita
        $result = mysqli_query($konekcija, $upit);               
        /*provera rezultata izvrsavanja SQL upita 
@@ -205,7 +209,8 @@ class Izdata extends KonekcijaDB
        if (!$pBrClana=='')
        {
          //$upit = "SELECT `RB izdavanja`, `Broj clana`, `Inventarni broj`, `ID bibliotekara`, `Datum izdavanja`, `Datum vracanja`, `Period` FROM `izdata` WHERE `Broj clana`='pBrClana';";
-       $upit = "SELECT `RB izdavanja`, `Broj clana`, `Inventarni broj`, `ID bibliotekara`, `Datum izdavanja`, `Datum vracanja`, `Period` FROM `izdata` WHERE `Broj clana`='1';";
+       $upit = "SELECT `RB izdavanja`, `Broj clana`, `Inventarni broj`, `ID bibliotekara`, `Datum izdavanja`, `Datum vracanja`, `Period` 
+               FROM `izdata` WHERE `Broj clana`='".$pBrClana."';";
        }
        //izvrsavanje SQL upita
        $result = mysqli_query($konekcija, $upit);               
